@@ -1,0 +1,70 @@
+{% extends 'flatpages/default.html' %}
+
+{% load custom_tags %}
+
+{% block title %}
+Responses
+{% endblock title %}
+
+
+{% block content %}
+    <h1>Отклики</h1>
+
+    <hr>
+
+    <form action="" method="GET">
+        {{ filterset.form.as_p }}
+        <button type="submit" style="display: inline-block;
+          padding: 10px 20px;
+          background-color: #0a0a23;
+          color: white;
+          text-decoration: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: box-shadow 0.3s ease;">Поиск</button>
+    </form>
+
+
+    <hr>
+    {% if response_list %}
+        <table cellpadding="15" width="95%" style="margin-top: 35px">
+            <tr>
+                <td>Автор отклика</td>
+                <td>Объявление</td>
+                <td>Содержание</td>
+            </tr>
+
+            {% for re in response_list %}
+            <tr>
+                <td>{{ re.author }}</td>
+                <td>{{ re.post }}</td>
+                <td>{{ re.text|truncatewords:20 }}</td>
+                <td><a href="{% url 'response_delete' re.id %}" style="display: inline-block;
+          padding: 10px 20px;
+          background-color: #0a0a23;
+          color: white;
+          text-decoration: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: box-shadow 0.3s ease;">Удалить</a></td>
+
+                {% if re.status == False %}
+                <td><a href="{% url 'response_status' re.id %}" style="display: inline-block;
+          padding: 10px 20px;
+          background-color: #0a0a23;
+          color: white;
+          text-decoration: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: box-shadow 0.3s ease;">Принять</a></td>
+                {% else %}
+                <td>Отклик принят</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Откликов нет!</h2>
+    {% endif %}
+
+{% endblock content %}

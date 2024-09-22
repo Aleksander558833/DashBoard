@@ -1,0 +1,29 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Post
+{% endblock title %}
+
+
+{% block content %}
+{% if Post %}
+        <table width="100%" style="margin-top: 35px">
+            <tr>
+                <td>Медиа файл</td>
+                <td>Заголовок</td>
+                <td>Описание</td>
+                <td>Категории</td>
+            </tr>
+
+            <tr>
+                {% if Post.media %}
+                <td><img src="{{ Post.media.url }}" alt="" width="120" height="120"></td>
+                {% endif %}
+                <td>{{ Post.title }}</td>
+                <td>{{ Post.text|truncatewords:20|safe }}</td>
+                <td>{{ Post.get_category_display }}</td>
+
+            </tr>
+        </table>
+{% endif %}
+{% endblock content %}

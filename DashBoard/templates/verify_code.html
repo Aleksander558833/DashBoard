@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'flatpages/default.html' %}
+<html>
+<head>
+    <title>Проверка одноразового кода</title>
+</head>
+<body>
+    <h1>Проверка одноразового кода</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="display: inline-block;
+          padding: 10px 20px;
+          background-color: #0a0a23;
+          color: white;
+          text-decoration: none;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+          transition: box-shadow 0.3s ease;">Подтвердить</button>
+    </form>
+</body>
+</html>
