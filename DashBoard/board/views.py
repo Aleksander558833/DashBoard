@@ -62,7 +62,8 @@ class ResponseCreate(LoginRequiredMixin, CreateView):
     form_class = ResponsesForm
     model = Responses
     template_name = 'response_create.html'
-    success_url = '/response_create/'
+    success_url = reverse_lazy('post_list')
+
 
     def form_valid(self, form):
         response = form.save(commit=False)

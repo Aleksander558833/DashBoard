@@ -148,6 +148,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/posts'
 LOGOUT_REDIRECT_URL = '/accounts/login'
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
@@ -165,6 +169,7 @@ EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_SUBJECT_PREFIX = 'Внимание!'
 DEFAULT_FROM_EMAIL = "kolchinaleksandr2432@yandex.ru"
+
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
