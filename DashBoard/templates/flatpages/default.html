@@ -9,6 +9,7 @@
         {% load static %}
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+        <link href="{% static 'css/das.css' %}" rel="stylesheet" />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -29,9 +30,11 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/posts/">Объявления</a>
                         </li>
+                        {% if not user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_signup' %}">Регистрация</a>
                         </li>
+                        {% endif %}
                         {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'response_list' %}">Мои отклики</a>

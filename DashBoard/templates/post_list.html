@@ -23,44 +23,28 @@ Post
               transition: box-shadow 0.3s ease;">Добавить объявление</a>
     {% endif %}
     {% if posts %}
-        <table cellpadding="15" width="95%" style="margin-top: 35px">
-            <tr>
-                <td>Заголовок</td>
-                <td>Описание</td>
-                <td>Действия</td>
-            </tr>
-
-            {% for post in posts %}
-            <tr>
-                <td>{{ post.title }}</td>
-                <td>{{ post.text|truncatewords:20|safe }}</td>
-
-                <td>
+    <div class="post-list">
+        {% for post in posts %}
+            <div class="post-item">
+                <h3>{{ post.title }}</h3>
+                <p>{{ post.text|truncatewords:20|safe }}</p>
+                <div class="post-actions">
                     {% if post.author == user %}
-                    <a href="{% url 'post_update' post.id %}">Изменить</a>
+                        <a href="{% url 'post_update' post.id %}" class="btn">Изменить</a>
+                        <a href="{% url 'post_delete' post.id %}" class="btn">Удалить</a>
                     {% endif %}
 
                     {% if post.author != user %}
-                    <a href="{% url 'response_create' post.id%}" style="display: inline-block;
-          padding: 10px 20px;
-          background-color: #0a0a23;
-          color: white;
-          text-decoration: none;
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-          transition: box-shadow 0.3s ease;">Откликнутся</a>
+                        <a href="{% url 'response_create' post.id %}" class="btn">Откликнуться</a>
                     {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <h2>Объявлений нет!</h2>
+{% endif %}
 
-                    {% if post.author == user %}
-                    <a href="{% url 'post_delete' post.id %}">Удалить</a>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <h2>Объявлений нет!</h2>
-    {% endif %}
 
     {% if page_obj.has_previous %}
     <a href="?{% url_replace page=1 %}">1</a>

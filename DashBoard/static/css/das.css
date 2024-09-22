@@ -1,0 +1,29 @@
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Расстояние между объявлениями */
+}
+
+.post-item {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-actions {
+    margin-top: 10px;
+}
+
+.post-actions .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0a0a23;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transition: box-shadow 0.3s ease;
+    margin-right: 10px; /* Отступ между кнопками */
+}
