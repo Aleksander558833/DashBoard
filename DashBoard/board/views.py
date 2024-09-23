@@ -27,10 +27,15 @@ class PostDetail(DetailView):
     template_name = 'post_detail.html'
     context_object_name = 'Post'
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     form_class = PostForm
     model = Post
     template_name = 'post_create.html'
+    success_url = '/posts/'
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user  # Назначаем текущего пользователя автором
+        return super().form_valid(form)
 
 class PostUpdate(UpdateView):
     form_class = PostForm

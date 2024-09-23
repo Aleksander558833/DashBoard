@@ -23,22 +23,23 @@ def post_create(instance, created, **kwargs):
 
 @receiver(post_save, sender=Responses)
 def send_response(sender, instance, created, **kwargs):
-    if not created:
-        return
-    if instance.status:
-        mail = instance.author.email
+    if created:
+        mail = instance.post.author.email
         send_mail(
-            subject='',
-            message=f'Ваш отклик на {instance.post} принят',
+            subject='Отклик на публикацию',
+            message=f'На вашу публикацию {instance.post} пришел отклик от {instance.author}',
             recipient_list=[mail],
             from_email=None,
             fail_silently=False,
         )
-    else:
-        mail = instance.post.author.email
+
+@receiver(post_save, sender=Responses)
+def send_response_accepted_notification(sender, instance, created, **kwargs):
+    if not created and instance.status:
+        mail = instance.author.email
         send_mail(
-            subject='',
-            message=f'На вашу публикацию {instance.post} пришел отклик от {instance.author}',
+            subject='Отклик принят',
+            message=f'Ваш отклик на {instance.post} принят',
             recipient_list=[mail],
             from_email=None,
             fail_silently=False,
